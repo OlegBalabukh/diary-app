@@ -2,6 +2,7 @@ import React from 'react';
 
 import './App.css';
 import List from '../List/List';
+import CommentList from '../CommentList/CommentList';
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <header className="app-header">
       </header>
       <List />
+      <CommentList />
     </div>
   );
 }

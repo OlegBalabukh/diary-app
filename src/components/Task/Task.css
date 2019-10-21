@@ -26,14 +26,12 @@
   -webkit-transition-duration: 0.3s; /* Safari */
   transition-duration: 0.3s;
 }
-
 .item {
   display: inline-flex;
-  height: 55px;
   width: 84%;
   position: relative;
   padding-top: 10px;
-  padding-bottom: 10px;
+  /* padding-bottom: 10px; */
   cursor: pointer;
 }
 
