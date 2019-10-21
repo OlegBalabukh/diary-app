@@ -1,36 +1,46 @@
 import React, { useState } from 'react';
 
+import Task from '../Task/Task';
 import './List.css';
 
-const Items = () => {
+const List = () => {
   const [items, setItems] = useState([]);
   const [text, setText] = useState("");
 
-  const handleChange = (e) => {
-    setText(e.target.value);
+  const handleChange = ({ target: { value } }) => {
+    setText(value);
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!text.length) {
-      return;
-    }
+    if (!text.length) return;
+
     const newItem = {
+      id: Date.now(),
       text: text,
-      id: Date.now()
+      isFocused: false
     };
     setItems([...items, newItem]);
     setText("");
   }
 
-  const deleteItem = (id) => {
+  const setActiveItem = (id) => {
+    setItems(items.map(item => {
+      item.id === id ?
+      item.isFocused = true :
+      item.isFocused = false;
+      return item;
+    }));
+  }
+
+  const removeItem = (id) => {
     setItems(items.filter(item => item.id !== id));
   }
   
   return (
     <div className="container">
       <h4>Items</h4>
-      <div>      
+      <div>
         <form onSubmit={handleSubmit}>
           <input
             className="form-control"
@@ -43,18 +53,16 @@ const Items = () => {
           </button>
         </form>
         {items.map(item => (
-            <div key={item.id} className="item">
-              <h5>{item.text}</h5>
-              <button className="btn btn-danger"
-              onClick={() => {deleteItem(item.id)}}
-              >
-              Delete
-              </button>
-            </div>
-          ))}
+          <Task
+            key={item.id}
+            task={item}
+            removeTask={removeItem}
+            setActiveTask={setActiveItem}
+          />
+        ))}
       </div>
     </div>
   );
 }
 
-export default Items;
+export default List;
