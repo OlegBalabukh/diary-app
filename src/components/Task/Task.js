@@ -1,13 +1,13 @@
 import React from 'react';
 
-import ColoredLine from '../ColoredLine/ColoredLine';
-import ColoredSquare from '../ColoredSquare/ColoredSquare';
+import Line from '../Line/Line';
+import Square from '../Square/Square';
 import './Task.css';
 
 const Task = ({ task: { id, text, isFocused}, removeTask, setActiveTask }) => (
   <div className="itemBlock"> 
     { isFocused && (
-      <ColoredSquare width="5px" height="55px" color="red" />
+      <Square width="5px" height="55px" color="red" />
     )}
     <div className="item">
       <h5 onClick={() => setActiveTask(id)} >
@@ -21,7 +21,7 @@ const Task = ({ task: { id, text, isFocused}, removeTask, setActiveTask }) => (
         Delete
       </button>
     </div>
-    <ColoredLine width="84%" />
+    <Line width="84%" />
   </div>
 );
 

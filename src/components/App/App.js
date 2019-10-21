@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './App.css';
-import List from '../List/List';
+import TaskList from '../TaskList/TaskList';
 import CommentList from '../CommentList/CommentList';
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
     <div className="app">
       <header className="app-header">
       </header>
-      <List />
+      <TaskList />
       <CommentList />
     </div>
   );

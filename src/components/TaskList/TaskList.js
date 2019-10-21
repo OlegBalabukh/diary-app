@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import Task from '../Task/Task';
-import './List.css';
+import './TaskList.css';
 
 const List = () => {
   const [items, setItems] = useState([]);

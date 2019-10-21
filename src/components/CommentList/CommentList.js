@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import Comment from '../Comment/Comment';
-import ColoredSquare from '../ColoredSquare/ColoredSquare';
+import Square from '../Square/Square';
 import './CommentList.css';
 
 const CommentList = () => {
@@ -31,7 +31,7 @@ const CommentList = () => {
       
       <div className="newCommentBlock"> 
         <div className="comment"> 
-          <ColoredSquare width="55px" height="55px" color="lightgray" />          
+          <Square width="55px" height="55px" color="lightgray" />          
           <textarea
             name="textarea"
             rows="3"
