@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 
 import Comment from '../Comment/Comment';
 import Square from '../Square/Square';
@@ -8,6 +8,7 @@ const CommentList = ({ comments, taskNumber, getLastComment }) => {
 
   const form = {};  
   const colors = ['orange', 'blue'];
+  const commentsEndRef = useRef(null);
 
   const update = (e) => {
     form[e.target.name] = e.target;
@@ -21,6 +22,12 @@ const CommentList = ({ comments, taskNumber, getLastComment }) => {
     }
   }
 
+  const scrollToBottom = () => {
+    commentsEndRef.current.scrollIntoView({ behavior: "smooth" });
+  }
+
+  useEffect(scrollToBottom, [comments]);
+
   return (
     <div className="commentsContainer">
       <h4>Comments #{taskNumber}</h4>
@@ -29,7 +36,7 @@ const CommentList = ({ comments, taskNumber, getLastComment }) => {
         ))}
       
       <div className="newCommentBlock"> 
-        <div className="comment"> 
+        <div className="comment" ref={commentsEndRef}> 
           <Square width="55px" height="55px" color="lightgray" />          
           <textarea
             name="textarea"
