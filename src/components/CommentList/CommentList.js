@@ -14,8 +14,8 @@ const CommentList = ({ comments, taskNumber, getLastComment }) => {
   }
 
   const  keydownHandler = (e) => {
-    if(e.keyCode === 13 && e.ctrlKey) {
-      const { value } = e.target;
+    const { value } = e.target;
+    if(e.keyCode === 13 && e.ctrlKey && value) {      
       getLastComment(value);
       form["textarea"].value = "";
     }
