@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Task from '../Task/Task';
 import './TaskList.css';
 import CommentList from '../CommentList/CommentList';
+import Line from '../Line/Line';
 
 const TaskList = () => {
   const [items, setItems] = useState([]);
@@ -61,7 +62,7 @@ const TaskList = () => {
   
   return (
     <div className="container">
-      <h4>Items</h4>
+      <h2>Items</h2>
       <div>
         <form onSubmit={handleSubmit}>
           <input
@@ -84,6 +85,7 @@ const TaskList = () => {
             removeTask={removeItem}
             setActiveTask={setActiveItem}
           />
+          <Line width="94%" />
           { isFocused && (
             <CommentList 
               comments={comments}

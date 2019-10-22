@@ -2,12 +2,13 @@ import React, { useRef, useEffect } from 'react';
 
 import Comment from '../Comment/Comment';
 import Square from '../Square/Square';
+import Line from '../Line/Line';
 import './CommentList.css';
 
 const CommentList = ({ comments, taskNumber, getLastComment }) => {
 
   const form = {};  
-  const colors = ['orange', 'blue'];
+  const colors = ['#FF8A00', '#47568D'];
   const commentsEndRef = useRef(null);
 
   const update = (e) => {
@@ -30,14 +31,17 @@ const CommentList = ({ comments, taskNumber, getLastComment }) => {
 
   return (
     <div className="commentsContainer">
-      <h4>Comments #{taskNumber}</h4>
+      <h2>Comments #{taskNumber}</h2>
       {comments.map((text, index) => (
-          <Comment key={index} text={text} color={colors[index % 2]} />
+        <div key={index}>
+          <Comment text={text} color={colors[index % 2]} />
+          { index < comments.length - 1 && (<Line width="92%" />) }   
+        </div>
         ))}
       
       <div className="newCommentBlock"> 
         <div className="comment" ref={commentsEndRef}> 
-          <Square width="55px" height="55px" color="lightgray" />          
+          <Square width="50px" height="50px" color="#E6E6E6" />          
           <textarea
             name="textarea"
             rows="3"
