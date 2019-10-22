@@ -4,7 +4,7 @@ import Comment from '../Comment/Comment';
 import Square from '../Square/Square';
 import './CommentList.css';
 
-const CommentList = ({ comments, getLastComment }) => {
+const CommentList = ({ comments, taskNumber, getLastComment }) => {
 
   const form = {};  
   const colors = ['orange', 'blue'];
@@ -23,7 +23,7 @@ const CommentList = ({ comments, getLastComment }) => {
 
   return (
     <div className="commentsContainer">
-      <h4>Comments #{comments.length }</h4>
+      <h4>Comments #{taskNumber}</h4>
       {comments.map((text, index) => (
           <Comment key={index} text={text} color={colors[index % 2]} />
         ))}

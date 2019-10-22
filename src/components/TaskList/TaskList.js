@@ -63,15 +63,22 @@ const TaskList = () => {
             Add new
           </button>
         </form>
-        {items.map(item => (
-          <div key={item.id}>
+        {items.map(({ id, text, isFocused, comments }, index) => (
+          <div key={id}>
           <Task            
-            task={item}
+            id={id}
+            text={text}
+            isFocused={isFocused}
+            commentsNumber={comments.length}
             removeTask={removeItem}
             setActiveTask={setActiveItem}
           />
-          { item.isFocused && (
-            <CommentList comments={item.comments} getLastComment={addLastComment} />
+          { isFocused && (
+            <CommentList 
+              comments={comments}
+              taskNumber={index+1}
+              getLastComment={addLastComment}
+            />
           )}
           </div>          
         ))}

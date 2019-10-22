@@ -4,7 +4,7 @@ import Line from '../Line/Line';
 import Square from '../Square/Square';
 import './Task.css';
 
-const Task = ({ task: { id, text, isFocused}, removeTask, setActiveTask }) => (
+const Task = ({ id, text, isFocused, commentsNumber, removeTask, setActiveTask }) => (
   <div className="itemBlock"> 
     { isFocused && (
       <Square width="5px" height="55px" color="red" />
@@ -12,7 +12,7 @@ const Task = ({ task: { id, text, isFocused}, removeTask, setActiveTask }) => (
     <div className="item">
       <h5 onClick={() => setActiveTask(id)} >
         {text}
-        <p id="comments" className="badge badge-pill">0</p>
+        { commentsNumber > 0 && <p id="comments" className="badge badge-pill">{commentsNumber}</p> }        
       </h5>
       <button
         className="btn btn-danger"
