@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Task from '../Task/Task';
 import './TaskList.css';
@@ -7,6 +7,17 @@ import CommentList from '../CommentList/CommentList';
 const TaskList = () => {
   const [items, setItems] = useState([]);
   const [text, setText] = useState("");
+
+  useEffect(() => {
+    const data = localStorage.getItem("tasks");
+    if (data) {
+      setItems(JSON.parse(data));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(items));
+  });
 
   const handleChange = ({ target: { value } }) => {
     setText(value);
