@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 
 import Task from '../Task/Task';
 import './TaskList.css';
+import CommentList from '../CommentList/CommentList';
 
-const List = () => {
+const TaskList = () => {
   const [items, setItems] = useState([]);
   const [text, setText] = useState("");
 
@@ -18,7 +19,8 @@ const List = () => {
     const newItem = {
       id: Date.now(),
       text: text,
-      isFocused: false
+      isFocused: false,
+      comments: []
     };
     setItems([...items, newItem]);
     setText("");
@@ -35,6 +37,15 @@ const List = () => {
 
   const removeItem = (id) => {
     setItems(items.filter(item => item.id !== id));
+  }
+
+  const addLastComment = (comment) => {
+    setItems(items.map(item => {
+      if (item.isFocused) {
+        item.comments = [...item.comments, comment];
+      }      
+      return item;
+    }));
   }
   
   return (
@@ -53,16 +64,20 @@ const List = () => {
           </button>
         </form>
         {items.map(item => (
-          <Task
-            key={item.id}
+          <div key={item.id}>
+          <Task            
             task={item}
             removeTask={removeItem}
             setActiveTask={setActiveItem}
           />
+          { item.isFocused && (
+            <CommentList comments={item.comments} getLastComment={addLastComment} />
+          )}
+          </div>          
         ))}
       </div>
     </div>
   );
 }
 
-export default List;
+export default TaskList;

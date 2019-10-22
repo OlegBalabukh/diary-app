@@ -1,3 +1,13 @@
+.commentsContainer {
+  width: 450px;
+  height: 500px;
+  overflow: auto;
+  border: 1px solid gray;
+  position: absolute;
+  left: 500px;
+  top: 30px;
+}
+
 .newCommentBlock {
   margin-top: 20px;
 }

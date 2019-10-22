@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import Comment from '../Comment/Comment';
 import Square from '../Square/Square';
 import './CommentList.css';
 
-const CommentList = () => {
+const CommentList = ({ comments, getLastComment }) => {
 
-  const form = {};
-  const [comments, addComment] = useState([]);
+  const form = {};  
   const colors = ['orange', 'blue'];
 
   const update = (e) => {
@@ -17,14 +16,14 @@ const CommentList = () => {
   const  keydownHandler = (e) => {
     if(e.keyCode === 13 && e.ctrlKey) {
       const { value } = e.target;
-      addComment([...comments, value]);
+      getLastComment(value);
       form["textarea"].value = "";
     }
   }
 
   return (
-    <div className="container">
-      <h4>Comments #{comments.length}</h4>
+    <div className="commentsContainer">
+      <h4>Comments #{comments.length }</h4>
       {comments.map((text, index) => (
           <Comment key={index} text={text} color={colors[index % 2]} />
         ))}
