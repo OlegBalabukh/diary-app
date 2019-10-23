@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 
-import Task from '../Task/Task';
-import './TaskList.css';
 import CommentList from '../CommentList/CommentList';
+import Task from '../Task/Task';
 import Line from '../Line/Line';
+import './TaskList.css';
 
 const TaskList = () => {
   const [items, setItems] = useState([]);
-  const [text, setText] = useState("");
+  const [itemText, setItemText] = useState("");
 
   useEffect(() => {
     const data = localStorage.getItem("tasks");
@@ -21,21 +21,21 @@ const TaskList = () => {
   });
 
   const handleChange = ({ target: { value } }) => {
-    setText(value);
+    setItemText(value);
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!text.length) return;
+    if (!itemText.length) return;
 
     const newItem = {
       id: Date.now(),
-      text: text,
+      text: itemText,
       isFocused: false,
       comments: []
     };
     setItems([...items, newItem]);
-    setText("");
+    setItemText("");
   }
 
   const setActiveItem = (id) => {
@@ -55,7 +55,7 @@ const TaskList = () => {
     setItems(items.map(item => {
       if (item.isFocused) {
         item.comments = [...item.comments, comment];
-      }      
+      }
       return item;
     }));
   }
@@ -68,7 +68,7 @@ const TaskList = () => {
           <input
             className="form-control"
             onChange={handleChange}
-            value={text}
+            value={itemText}
             placeholder="Type name here..."
           />
           <button className="btn btn-success">
@@ -77,7 +77,7 @@ const TaskList = () => {
         </form>
         {items.map(({ id, text, isFocused, comments }, index) => (
           <div key={id}>
-          <Task            
+          <Task
             id={id}
             text={text}
             isFocused={isFocused}
@@ -87,13 +87,13 @@ const TaskList = () => {
           />
           <Line width="90%" />
           { isFocused && (
-            <CommentList 
+            <CommentList
               comments={comments}
               taskNumber={index+1}
               getLastComment={addLastComment}
             />
           )}
-          </div>          
+          </div>
         ))}
       </div>
     </div>

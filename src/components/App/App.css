@@ -27,8 +27,8 @@ header p {
   font-size: 0.55em;
 }
 
-.container { 
-  width: 490px;  
+.container {
+  width: 490px;
   height: 515px;
   overflow: auto;
   box-shadow: 0 0 4px gray;

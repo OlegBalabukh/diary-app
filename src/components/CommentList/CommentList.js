@@ -7,17 +7,17 @@ import './CommentList.css';
 
 const CommentList = ({ comments, taskNumber, getLastComment }) => {
 
-  const form = {};  
+  const form = {};
   const colors = ['#FF8A00', '#47568D'];
   const commentsEndRef = useRef(null);
 
-  const update = (e) => {
+  const updateInput = (e) => {
     form[e.target.name] = e.target;
   }
 
   const  keydownHandler = (e) => {
     const { value } = e.target;
-    if(e.keyCode === 13 && e.ctrlKey && value) {      
+    if(e.keyCode === 13 && e.ctrlKey && value) {
       getLastComment(value);
       form["textarea"].value = "";
     }
@@ -34,24 +34,24 @@ const CommentList = ({ comments, taskNumber, getLastComment }) => {
       <h2>Comments #{taskNumber}</h2>
       {comments.map((text, index) => (
         <div key={index}>
+          { index > 0 && (<Line width="92%" />) }
           <Comment text={text} color={colors[index % 2]} />
-          { index < comments.length - 1 && (<Line width="92%" />) }   
         </div>
         ))}
       
-      <div className="newCommentBlock"> 
-        <div className="comment" ref={commentsEndRef}> 
-          <Square width="50px" height="50px" color="#E6E6E6" />          
+      <div className="newCommentBlock">
+        <div className="comment" ref={commentsEndRef}>
+          <Square width="50px" height="50px" color="#E6E6E6" />
           <textarea
             name="textarea"
             rows="3"
-            autoFocus="autofocus"            
+            autoFocus="autofocus"
             onKeyDown={keydownHandler}
-            onChange={update}      
+            onChange={updateInput}
           />
         </div>
       </div>
-    </div>  
+    </div>
   )
 } 
 
