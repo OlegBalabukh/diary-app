@@ -8,6 +8,8 @@ function App() {
   return (
     <div className="app">
       <header className="app-header">
+        DIARY APP
+        <p>Keep your tasks here</p>
       </header>
       <TaskList />      
     </div>

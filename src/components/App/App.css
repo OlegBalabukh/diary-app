@@ -1,17 +1,39 @@
 @import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 .app {
-  display: inline-flex;
+  display: flex;
+  position: absolute;
   text-align: center;
-  padding: 20px;
+  border: 1px solid #2C2F3E;
+  width: 1275px;
+  height: 700px; 
+  top: 20px; 
+  left: 10%;
+  right: 10%;  
+}
+
+.app-header {
+  width: 260px;
+  height: 100%;
+  background-color: #2C2F3E;
+  margin-right: 10px;
+  padding: 10px 0 0 25px;
+  font-size: 2.1em;
+  color: #fff;
+  text-align: left;
+}
+
+header p {
+  font-size: 0.55em;
 }
 
 .container { 
-  width: 490px;
-  height: 500px;
+  width: 490px;  
+  height: 515px;
   overflow: auto;
   box-shadow: 0 0 4px gray;
-  margin-top: 10px;
+  margin-top: 35px;
+  margin-left: 20px;
 }
 
 div h2 {

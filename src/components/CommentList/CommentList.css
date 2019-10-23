@@ -1,11 +1,11 @@
 .commentsContainer {
   width: 450px;
-  height: 500px;
+  height: 515px;
   overflow: auto;
   box-shadow: 0 0 4px gray;
   position: absolute;
-  left: 530px;
-  top: 30px;
+  right: 20px;
+  top: 35px;
 }
 
 .newCommentBlock {

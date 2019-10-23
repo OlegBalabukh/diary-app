@@ -85,7 +85,7 @@ const TaskList = () => {
             removeTask={removeItem}
             setActiveTask={setActiveItem}
           />
-          <Line width="94%" />
+          <Line width="90%" />
           { isFocused && (
             <CommentList 
               comments={comments}
