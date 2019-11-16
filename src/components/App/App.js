@@ -1,8 +1,10 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 
 import './App.css';
 import TaskList from '../TaskList/TaskList';
-
+import store from '../../store'
+console.log(store)
 
 const App = () => (
   <div className="app">
@@ -10,7 +12,10 @@ const App = () => (
       DIARY APP
       <p>Keep your tasks here</p>
     </header>
-    <TaskList />      
+    <Provider store = { store }>
+      <TaskList /> 
+    </Provider>
+         
   </div>
   );
 
