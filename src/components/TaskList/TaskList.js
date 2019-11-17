@@ -1,64 +1,47 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from "react-redux";
 
 import CommentList from '../CommentList/CommentList';
 import Task from '../Task/Task';
 import Line from '../Line/Line';
+import { addTaskAction } from "./actions/addTask.action";
+import { deleteTaskAction } from "./actions/deleteTask.action";
+import { setActiveTaskAction } from "./actions/setActiveTask.action";
+import { addCommentAction } from "./actions/addComment.action";
 import './TaskList.css';
 
-const TaskList = () => {
-  const [items, setItems] = useState([]);
-  const [itemText, setItemText] = useState("");
+const TaskList = ({addTask, deleteTask, setActiveTask, addComment, tasks}) => {  
+  const [taskName, setTaskName] = useState("");
+  
+  console.log(tasks);
+  
+  // useEffect(() => {
+  //   const data = localStorage.getItem("tasks");
+  //   if (data) {
+  //     setItems(JSON.parse(data));
+  //   }
+  // }, []);
 
-  useEffect(() => {
-    const data = localStorage.getItem("tasks");
-    if (data) {
-      setItems(JSON.parse(data));
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("tasks", JSON.stringify(items));
-  });
+  // useEffect(() => {
+  //   localStorage.setItem("tasks", JSON.stringify(tasks));
+  // });
 
   const handleChange = ({ target: { value } }) => {
-    setItemText(value);
+    setTaskName(value);
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!itemText.length) return;
+    if (!taskName.length) return;
 
-    const newItem = {
+    const newTask = {
       id: Date.now(),
-      text: itemText,
-      isFocused: false,
-      comments: []
-    };
-    setItems([...items, newItem]);
-    setItemText("");
-  }
+      taskName
+    }
 
-  const setActiveItem = (id) => {
-    setItems(items.map(item => {
-      item.id === id ?
-      item.isFocused = true :
-      item.isFocused = false;
-      return item;
-    }));
-  }
-
-  const removeItem = (id) => {
-    setItems(items.filter(item => item.id !== id));
-  }
-
-  const addLastComment = (comment) => {
-    setItems(items.map(item => {
-      if (item.isFocused) {
-        item.comments = [...item.comments, comment];
-      }
-      return item;
-    }));
-  }
+   addTask(newTask);
+   setTaskName("");
+  }  
   
   return (
     <div className="container">
@@ -68,29 +51,29 @@ const TaskList = () => {
           <input
             className="form-control"
             onChange={handleChange}
-            value={itemText}
+            value={taskName}
             placeholder="Type name here..."
           />
           <button className="btn btn-success">
             Add new
           </button>
         </form>
-        {items.map(({ id, text, isFocused, comments }, index) => (
+        {tasks && tasks.map(({ id, taskName, isFocused, comments }, index) => (
           <div key={id}>
           <Task
             id={id}
-            text={text}
+            text={taskName}
             isFocused={isFocused}
             commentsNumber={comments.length}
-            removeTask={removeItem}
-            setActiveTask={setActiveItem}
+            removeTask={deleteTask}
+            setActiveTask={setActiveTask}
           />
           <Line width="90%" />
           { isFocused && (
             <CommentList
               comments={comments}
               taskNumber={index+1}
-              getLastComment={addLastComment}
+              getLastComment={addComment}
             />
           )}
           </div>
@@ -100,4 +83,16 @@ const TaskList = () => {
   );
 }
 
-export default TaskList;
+const mapStateToProps = (state) => ({
+  tasks: state
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  addTask: (newTask) => { dispatch(addTaskAction(newTask)); },
+  deleteTask: (id) => { dispatch(deleteTaskAction(id)); },
+  setActiveTask: (id) => { dispatch(setActiveTaskAction(id)); },
+  addComment: (comment) => { dispatch(addCommentAction(comment)); },
+
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TaskList);
