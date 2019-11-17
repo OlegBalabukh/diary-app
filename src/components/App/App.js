@@ -2,7 +2,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 
 import './App.css';
-import TaskList from '../TaskList/TaskList';
+import TaskList from '../../containers/TaskList/TaskList';
 import store from '../../store';
 
 const App = () => (

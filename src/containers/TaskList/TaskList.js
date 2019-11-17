@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from "react-redux";
 
-import CommentList from '../CommentList/CommentList';
-import Task from '../Task/Task';
-import Line from '../Line/Line';
+import CommentList from '../../components/CommentList/CommentList';
+import Task from '../../components/Task/Task';
+import Line from '../../components/Line/Line';
 import { addTaskAction } from "./actions/addTask.action";
 import { deleteTaskAction } from "./actions/deleteTask.action";
 import { setActiveTaskAction } from "./actions/setActiveTask.action";
@@ -11,10 +11,18 @@ import { addCommentAction } from "./actions/addComment.action";
 import { addTasksFromLocalStorageAction } from "./actions/addTasksFromLocalStorage.action";
 import './TaskList.css';
 
-const TaskList = ({addTask, addTasksFromLocalStorage, deleteTask, setActiveTask, addComment, tasks}) => {  
+const TaskList = (props) => {
+  const { 
+    addTask,
+    addTasksFromLocalStorage,
+    deleteTask,
+    setActiveTask,
+    addComment
+  } = props;
+
+  const { tasks } = props;
+
   const [taskName, setTaskName] = useState("");
-  
-  console.log(tasks);
   
   useEffect(() => {
     const data = localStorage.getItem("tasks");
@@ -63,10 +71,10 @@ const TaskList = ({addTask, addTasksFromLocalStorage, deleteTask, setActiveTask,
           <div key={id}>
           <Task
             id={id}
-            text={taskName}
+            taskName={taskName}
             isFocused={isFocused}
             commentsNumber={comments.length}
-            removeTask={deleteTask}
+            deleteTask={deleteTask}
             setActiveTask={setActiveTask}
           />
           <Line width="90%" />
