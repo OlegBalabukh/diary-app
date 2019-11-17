@@ -8,23 +8,24 @@ import { addTaskAction } from "./actions/addTask.action";
 import { deleteTaskAction } from "./actions/deleteTask.action";
 import { setActiveTaskAction } from "./actions/setActiveTask.action";
 import { addCommentAction } from "./actions/addComment.action";
+import { addTasksFromLocalStorageAction } from "./actions/addTasksFromLocalStorage.action";
 import './TaskList.css';
 
-const TaskList = ({addTask, deleteTask, setActiveTask, addComment, tasks}) => {  
+const TaskList = ({addTask, addTasksFromLocalStorage, deleteTask, setActiveTask, addComment, tasks}) => {  
   const [taskName, setTaskName] = useState("");
   
   console.log(tasks);
   
-  // useEffect(() => {
-  //   const data = localStorage.getItem("tasks");
-  //   if (data) {
-  //     setItems(JSON.parse(data));
-  //   }
-  // }, []);
+  useEffect(() => {
+    const data = localStorage.getItem("tasks");
+    if (data) {
+      addTasksFromLocalStorage(JSON.parse(data));
+    }
+  }, [addTasksFromLocalStorage]);
 
-  // useEffect(() => {
-  //   localStorage.setItem("tasks", JSON.stringify(tasks));
-  // });
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  });
 
   const handleChange = ({ target: { value } }) => {
     setTaskName(value);
@@ -92,7 +93,9 @@ const mapDispatchToProps = (dispatch) => ({
   deleteTask: (id) => { dispatch(deleteTaskAction(id)); },
   setActiveTask: (id) => { dispatch(setActiveTaskAction(id)); },
   addComment: (comment) => { dispatch(addCommentAction(comment)); },
-
+  addTasksFromLocalStorage: (tasks) => { 
+    dispatch(addTasksFromLocalStorageAction(tasks));
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TaskList);

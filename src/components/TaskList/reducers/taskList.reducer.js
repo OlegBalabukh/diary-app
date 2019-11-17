@@ -31,6 +31,8 @@ export const taskListReducer = (state = [], {type, payload}) => {
           })
           return task;
           });
+      case "ADD_TASKS_FROM_LOCAL_STORAGE":
+        return payload;
       
       default: 
         return state  
