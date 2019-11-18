@@ -18,7 +18,7 @@ export const taskListReducer = (state = [], {type, payload}) => {
       });
 
       case DELETE_TASK:
-        return state.filter(task => 
+        return state.filter(task =>
           task.id !== payload );
 
       case SET_ACTIVE_TASK:
@@ -42,7 +42,7 @@ export const taskListReducer = (state = [], {type, payload}) => {
       case ADD_TASKS_FROM_LOCAL_STORAGE:
         return payload;
       
-      default: 
-        return state  
+      default:
+        return state
   }
 }

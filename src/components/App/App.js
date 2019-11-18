@@ -12,8 +12,8 @@ const App = () => (
       <p>Keep your tasks here</p>
     </header>
     <Provider store = {store}>
-      <TaskList /> 
-    </Provider>         
+      <TaskList />
+    </Provider>
   </div>
   );
 
