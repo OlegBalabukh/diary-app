@@ -8,6 +8,10 @@
   top: 35px;
 }
 
+#commentsNumber {
+  color: #FF2C5F
+}
+
 .comment {
   display: inline-flex;
   width: 84%;

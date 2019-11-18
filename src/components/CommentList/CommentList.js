@@ -31,7 +31,7 @@ const CommentList = ({ comments, taskNumber, addComment }) => {
 
   return (
     <div className="commentsContainer">
-      <h2>Comments #{taskNumber}</h2>
+      <h2><i>Comments <span id="commentsNumber">#{taskNumber}</span></i></h2>
       {comments.map((text, index) => (
         <div key={index}>
           { index > 0 && (<Line width="92%" />) }

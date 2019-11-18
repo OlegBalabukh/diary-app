@@ -54,7 +54,7 @@ const TaskList = (props) => {
   
   return (
     <div className="container">
-      <h2>Items</h2>
+      <h2><i>Items</i></h2>
       <div>
         <form onSubmit={handleSubmit}>
           <input
