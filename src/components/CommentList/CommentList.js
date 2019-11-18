@@ -5,7 +5,7 @@ import Square from '../Square/Square';
 import Line from '../Line/Line';
 import './CommentList.css';
 
-const CommentList = ({ comments, taskNumber, getLastComment }) => {
+const CommentList = ({ comments, taskNumber, addComment }) => {
 
   const form = {};
   const colors = ['#FF8A00', '#47568D'];
@@ -18,7 +18,7 @@ const CommentList = ({ comments, taskNumber, getLastComment }) => {
   const  keydownHandler = (e) => {
     const { value } = e.target;
     if(e.keyCode === 13 && e.ctrlKey && value) {
-      getLastComment(value);
+      addComment(value);
       form["textarea"].value = "";
     }
   }

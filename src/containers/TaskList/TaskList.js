@@ -82,7 +82,7 @@ const TaskList = (props) => {
             <CommentList
               comments={comments}
               taskNumber={index+1}
-              getLastComment={addComment}
+              addComment={addComment}
             />
           )}
           </div>
